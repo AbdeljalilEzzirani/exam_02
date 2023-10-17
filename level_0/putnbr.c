@@ -1,45 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter.c                                            :+:      :+:    :+:   */
+/*   putnbr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abez-zir <abez-zir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 14:41:58 by abez-zir          #+#    #+#             */
-/*   Updated: 2023/10/17 19:02:39 by abez-zir         ###   ########.fr       */
+/*   Created: 2023/10/17 17:05:18 by abez-zir          #+#    #+#             */
+/*   Updated: 2023/10/17 17:21:15 by abez-zir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	check(char *str, char c, int len_or_nbr)
+void	ft_putchar(char c)
 {
-	int				i;
+	write (1, &c, 1);
+}
 
-	i = 0;
-	while (str[i] && (i < len_or_nbr || len_or_nbr == -1))
+int	ft_putnbr(int number)
+{
+	int			fact;
+
+	fact = 1;
+	if (number < M)
+	if (number < 0)
 	{
-		if (c == str[i])
-			return (1);
-		i++;
+		number = number * -1;
+		ft_putchar('-');		
 	}
+	if (number > 10)
+		ft_putnbr(number / 10);
+	ft_putchar(((number % 10) * fact) + 48);
 	return (0);
 }
 
-int main (int ac, char **av)
+int main ()
 {
-	int			i;
-
-	i = 0;
-	if (ac == 3)
-	{	
-		while (av[1][i])
-		{
-			if ((check(av[1], av[1][i], i) == 0) && (check(av[2], av[1][i], -1) == 1))
-				write (1, &av[1][i], 1);
-			i++;
-		}
-	}
-	write (1, "\n", 1);
-	return (0);
+	int		i;
+	
+	i = -220;
+	ft_putnbr(i);
 }

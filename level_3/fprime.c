@@ -1,45 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter.c                                            :+:      :+:    :+:   */
+/*   fprime.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abez-zir <abez-zir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 14:41:58 by abez-zir          #+#    #+#             */
-/*   Updated: 2023/10/17 19:02:39 by abez-zir         ###   ########.fr       */
+/*   Created: 2023/10/16 20:49:40 by abez-zir          #+#    #+#             */
+/*   Updated: 2023/10/16 21:03:20 by abez-zir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-int	check(char *str, char c, int len_or_nbr)
-{
-	int				i;
-
-	i = 0;
-	while (str[i] && (i < len_or_nbr || len_or_nbr == -1))
-	{
-		if (c == str[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
+#include <stdio.h>
+#include <stdlib.h>
 
 int main (int ac, char **av)
 {
-	int			i;
-
-	i = 0;
-	if (ac == 3)
-	{	
-		while (av[1][i])
+	int			number;
+	int			calculeure;
+	
+	calculeure = 1;
+	if (ac == 2)
+	{
+		number = atoi(av[1]);
+		while (number >= ++calculeure)
 		{
-			if ((check(av[1], av[1][i], i) == 0) && (check(av[2], av[1][i], -1) == 1))
-				write (1, &av[1][i], 1);
-			i++;
+			if (number % calculeure == 0)
+			{
+				printf("%d", calculeure);
+				if (number == calculeure)
+					break;
+				printf("*");
+				number = number / calculeure;
+				calculeure = 1;
+			}
 		}
 	}
-	write (1, "\n", 1);
+	printf("\n");
 	return (0);
 }
