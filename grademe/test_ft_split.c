@@ -1,10 +1,10 @@
 #include <stdlib.h>
 
-char *ft_strncpy(char *dest, char *str, int nbr)
+char	*ft_strncpy(char *dest, char *str, int n)
 {
 	int		i = 0;
 
-	while (i <= nbr && str[i])
+	while (i < n && str[i])
 	{
 		dest[i] = str[i];
 		i++;
@@ -16,35 +16,44 @@ char *ft_strncpy(char *dest, char *str, int nbr)
 char    **ft_split(char *str)
 {
 	int		i = 0;
+	int		j = 0;
 	int		k = 0;
-	int		l = 0;
+	int		wc = 0;
 
 	while (str[i])
 	{
-		while (str[i] && str[i] == ' ' && str[i] == '\t' && str[i] == '\n')
+		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
-		k++;
-		while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+		if (str[i])
+			wc++;
+		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
 			i++;
 	}
-	char **dest = (char **)malloc(sizeof(char *) * (k + 1));
+	char	**out = (char **)malloc(sizeof(char *) * (wc + 1));
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] && str[i] == ' ' && str[i] == '\t' && str[i] == '\n')
+		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
-		k = i;
-		while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+		j = i;
+		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
 			i++;
-		if (i > k)
+		if (i > j)
 		{
-			dest[l] = (char *)malloc(sizeof(char) * ((i - k) + 1));
-			ft_strncpy(dest[k++], &str[i], i - k);
+			out[k] = (char *)malloc(sizeof(char) * ((i - j) + 1));
+			ft_strncpy(out[k++], &str[j], i - j);
 		}
 	}
-	dest[k] = NULL;
-	return (dest);
+	out[k] = NULL;
+	return (out);
 }
+
+
+
+
+
+
+
 
 #include <stdio.h>
 
